@@ -5,9 +5,9 @@ I'm trying to achieve.
 Fair bit of warning: I am a hobbyist that doesn't even own a knitting machine
 (yet), and has a very shallow understanding of knitting techniques.
 This tool is obviously inspired by a very diverse lineage of existing tools for
-hobbyist of professionals.
-It's being developed in the open and I'm open for contributions,
-but if you're looking for a reliable and feature-complete tool, that's not it.
+hobbyist and professionals.
+It is being developed in public and I'm open for contributions,
+but if you are looking for a reliable and feature-complete tool, that's not it.
 Your best bet is any of the tools in the *references* section of this document.
 
 ## References
