@@ -8,12 +8,58 @@
     <link href="favicon.svg" rel="shortcut icon" type="image/svg">
   </head>
   <body>
-    <nav>
-      <button id="knit" value="knit"><img src="./knit.svg"></button>
-      <button id="pull" value="pull"><img src="./pull.svg"></button>
-      <button id="tuck" value="tuck"><img src="./tuck.svg"></button>
-      <a class="gap" href="https://github.com/flupe/knitter">GH</a>
+    <header>
+      <nav>
+        <button id="knit" value="knit" title="Knit"><img src="./knit.svg"></button>
+        <button id="pull" value="pull" title="Pull"><img src="./pull.svg"></button>
+        <button id="tuck" value="tuck" title="Tuck"><img src="./tuck.svg"></button>
+        <button title="Miss">
+<svg   viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' height='16' width='16'>
+  <c  ircle cx="8" cy="8" r="7" stroke="#000" fill="none" stroke-width="2"/>
+</sv  g>
+        </button>
+      <!--
+      <button>
+<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' height='16' width='16'>
+  <path d="M 8 1 L 8 15 M 1 8 L 15 8" stroke="#000" fill="none"
+    stroke-width="2"
+    stroke-linecap="round"/>
+</svg> 
+      </button>
+      -->
+      <button title="Right over cross">
+<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' height='16' width='16'>
+  <path d="M 1 1 L 15 15 M 1 15 L 5.5 10.5 M 10.5 5.5 L 15 1" stroke="#000" fill="none"
+    stroke-width="2"
+    stroke-linecap="round"/>
+</svg>
+      </button>
+      <button title="Left over cross">
+<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' height='16' width='16'>
+  <path d="M 15 1 L 1 15 M 15 15 L 10.5 10.5 M 5.5 5.5 L 1 1" stroke="#000" fill="none"
+    stroke-width="2"
+    stroke-linecap="round"/>
+</svg>
+      </button>
+      <button title="Transfer left to right">
+<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' height='16' width='16'>
+  <path d="M 14 1 L 2 15 M 14 15 L 8 8" stroke="#000" fill="none"
+    stroke-width="2"
+    stroke-linecap="round"/>
+</svg>
+      </button>
+      <button title="Transfer right to left">
+<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' height='16' width='16'>
+  <path d="M 2 1 L 14 15 M 2 15 L 8 8" stroke="#000" fill="none"
+    stroke-width="2"
+    stroke-linecap="round"/>
+</svg>
+      </button>
+      <a class="gap" href="https://github.com/flupe/knitter">View on Github</a>
     </nav>
+    <nav id="yarn_swatch">
+    </nav>
+    </header>
     <main id="main"></main>
   </body>
 </html>

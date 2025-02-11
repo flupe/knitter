@@ -11,27 +11,33 @@ body {
   height: 100vh;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 50px 1fr;
+  grid-template-rows: auto 1fr;
 }
 
-body > nav {
-
+body > header {
   padding: 10px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+body > header nav {
+  display: flex;
+  flex-direction: row;
   gap: 7px;
 
-  button, a {
+  button {
+    padding: 3px;
     color: #000;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background: #eee;
     border: none;
     outline: none;
+    height: 22px;
     aspect-ratio: 1 / 1;
-    width: 100%;
     border-radius: 10%;
     text-transform: uppercase;
     cursor: pointer;
@@ -47,7 +53,7 @@ body > nav {
   }
 
   a.gap {
-    margin-top: auto
+    margin-left: auto
   }
 }
 
@@ -63,13 +69,36 @@ main {
   &.grabbing { cursor: grabbing }
 }
 
+@property --yarn {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
 table.design {
+  counter-reset: rows;
   border-collapse: collapse;
   /* transition: scale .1s; */
   table-layout: fixed;
 
+  tr {
+    counter-increment: rows;
+
+    &::before {
+      content: counter(rows);
+      right: 0;
+      font-size: .7rem;
+      position: absolute;
+      line-height: 1.4rem;
+      display: table-cell;
+      right: calc(100% + .5em);
+    }
+  }
+
   td {
     border: 1px solid #888;
+    background-color: var(--yarn);
+
 
     div {
       width: var(--stitch-size);
@@ -77,16 +106,16 @@ table.design {
       background-position: center;
       background-size: 70%;
       background-repeat: no-repeat;
+      mix-blend-mode: difference;
       filter: invert(100%);
 
-      &.knit { background-image: url(knit.svg) }
-      &.pull { background-image: url(pull.svg) }
-      &.tuck { background-image: url(tuck.svg) }
+      /* &:hover {
+        background: rgba(256, 256, 256, .2)
+      } */
     }
 
-    &:hover {
-      background: rgba(256, 256, 256, .2)
-    }
-
+    &[data-stitch="knit"] div { background-image: url(knit.svg) }
+    &[data-stitch="pull"] div { background-image: url(pull.svg) }
+    &[data-stitch="tuck"] div { background-image: url(tuck.svg) }
   }
 }

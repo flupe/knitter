@@ -1,11 +1,12 @@
 // initial design size
 const WIDTH  = 32
-const HEIGHT = 16
+const HEIGHT = 32
 
 // global vars
 const MOUSE = {x: 0, y: 0, down: false}
 let TOOL = null
 let SPACEBAR = false
+let YARN = 0 // active yarn id
 
 // viewport params
 let SCALE = 1.0
@@ -21,9 +22,10 @@ const on = (t, e, f) =>
 const bind = (o, f) => o[f].bind(o)
 const $ = bind(document, "createElement")
 
+const DESIGN = []
 
 function createDesign() {
-  // table.design > div (row) > span (cell)
+  // table.design > tr (row) > td (cell) > div
   const container = $("table")
   const body      = $("tbody")
 
@@ -36,6 +38,7 @@ function createDesign() {
 
   stitch.classList.add("stitch")
   cell.appendChild(stitch)
+  cell.dataset.stitch = "knit"
 
   // create cells for a single row
   for (let i = 0; i < WIDTH; i++)
@@ -50,8 +53,35 @@ function createDesign() {
   return container
 }
 
+
 const table = createDesign()
 updateDesign()
+
+// initialize yarns
+const yarns = (function(colors) {
+  const yarns = []
+  colors.forEach((col, i) => {
+    const yarn = {
+      color: col,
+      swatch: $('button'),
+    }
+
+    document.body.style.setProperty(`--yarn-color${i}`, col)
+    yarn.swatch.classList.toggle("active", i == 0)
+    yarn.swatch.style.background = `var(--yarn-color${i})`
+    yarn_swatch.appendChild(yarn.swatch)
+
+    on(yarn.swatch, "click", async () => {
+      yarns[YARN].swatch.classList.remove("active")
+      yarn.swatch.classList.add("active")
+      YARN = i
+    })
+
+    yarns.push(yarn)
+  })
+
+  return yarns
+})(['#f0c432', '#68942f', '#782354'])
 
 // reapply CSS transform
 function updateDesign() {
@@ -69,7 +99,7 @@ on(main, "wheel", async e => {
   let dx    = MOUSE.x - width  / 2
   let dy    = MOUSE.y - height / 2
   let ratio = SCALE * e.deltaY / 800
-  SCALE = Math.max(1, SCALE - SCALE * e.deltaY / 800)
+  SCALE = Math.max(.5, SCALE - SCALE * e.deltaY / 800)
   updateDesign()
 })
 
@@ -121,15 +151,22 @@ on(window, "keydown", async e => {
   }
 })
 
-table.querySelectorAll("td div").forEach(cell => {
+table.querySelectorAll("td").forEach(cell => {
   on(cell, "mousedown", e => {
     if (SPACEBAR) return
-    if (TOOL) cell.classList.add(TOOL)
+    if (TOOL){
+      cell.dataset.stitch = TOOL
+      cell.dataset.yarn   = YARN
+      cell.style.background = `var(--yarn-color${YARN})`
+    }
   })
 
   on(cell, "mouseover", e => {
     if (SPACEBAR) return
-    if (TOOL && MOUSE.down) cell.classList.add(TOOL)
+    if (TOOL && MOUSE.down) {
+      cell.dataset.stitch = TOOL
+      cell.style.background = `var(--yarn-color${YARN})`
+    }
   })
 })
 

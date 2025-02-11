@@ -11,6 +11,18 @@ I'm trying to achieve.
 > but if you are looking for a reliable and feature-complete tool, that's not it.
 > Your best bet is any of the tools in the *references* section of this document.
 
+## The Plan
+
+- A pretty-good web (indexed-picture mode) pixel art editor for yarn & stitch selection
+- A fast and pretty 3d-vis of the design
+- A programmatic interface for procedural designs
+
+## Misc
+
+- Possible names when the tool is public:
+  - Knitter (maybe some other things exist with this name)
+  - Graknit (Gra)
+
 ## References
 
 - [KnitScape](https://knitscape.net)
