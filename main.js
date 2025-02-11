@@ -93,13 +93,15 @@ function updateDesign() {
 on(main, "wheel", async e => {
   // scroll magic
   e.preventDefault()
-  let width  = table.offsetWidth
-  let height = table.offsetHeight
-
-  let dx    = MOUSE.x - width  / 2
-  let dy    = MOUSE.y - height / 2
-  let ratio = SCALE * e.deltaY / 800
-  SCALE = Math.max(.5, SCALE - SCALE * e.deltaY / 800)
+  let width   = main.offsetWidth
+  let height  = main.offsetHeight
+  let dx      = MOUSE.x - width  / 2
+  let dy      = MOUSE.y - height / 2
+  let rescale = Math.max(.5, SCALE - SCALE * e.deltaY / 800)
+  let ds      = rescale / SCALE
+  OFFSET.x += dx * (1 - ds) / rescale
+  OFFSET.y += dy * (1 - ds) / rescale
+  SCALE = rescale
   updateDesign()
 })
 
