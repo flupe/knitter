@@ -4,9 +4,10 @@
     <title>knitter</title>
     <meta charset="utf-8">
     <link href="theme.css" rel="stylesheet">
-    <link href="favicon.svg" rel="shortcut icon" type="image/svg">
+    <link href="assets/favicon.svg" rel="shortcut icon" type="image/svg">
     <script src="src/prelude.js" type="module"></script>
     <script src="src/design.js"  type="module"></script>
+    <script src="src/picker.js"    type="module"></script>
     <script src="src/main.js"    type="module"></script>
   </head>
   <body>
@@ -36,7 +37,31 @@
     </nav>
     <nav id="yarn_swatch">
     </nav>
+    <!--
+    <nav>
+      <color-picker>
+    </nav>
+    -->
     </header>
     <main id="main"></main>
+
+    <!-- component templates -->
+    <template id="picker_template">
+      <div class="picker">
+        <link href="theme.css" rel="stylesheet">
+        <canvas></canvas>
+        <div>
+          <input type="range" id="hue" name="hue"><br>
+          <label for="red">R: </label>
+          <input type="text">
+          <br>
+          <label for="green">G: </label>
+          <input type="text">
+          <br>
+          <label for="blue">B: </label>
+          <input type="text">
+        </div>
+      </div>
+    </template
   </body>
 </html>
