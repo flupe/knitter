@@ -106,7 +106,7 @@ table.design {
       background-position: center;
       background-size: 70%;
       background-repeat: no-repeat;
-      mix-blend-mode: difference;
+      /* mix-blend-mode: difference; */
       filter: invert(100%);
 
       /* &:hover {
