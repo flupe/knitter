@@ -120,6 +120,7 @@ table.design {
   visibility: hidden;
 
   #picker_square {
+    cursor: pointer;
     display: block;
     aspect-ratio: 1;
     color: #f00;
@@ -131,6 +132,7 @@ table.design {
   }
 
   #picker_marker {
+    cursor: grab;
     position: absolute;
     width: 15px;
     height: 15px;
@@ -144,12 +146,15 @@ table.design {
 
   #picker_hue {
     background: transparent;
+    margin: 0;
     display: block;
     width: 100%
   }
 
   #picker_hue::-moz-range-track,
   #picker_hue::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 2px;
     background: linear-gradient(to right,
       #f00   0,
       #ff0  16.66%,
