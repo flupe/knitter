@@ -109,24 +109,54 @@ table.design {
   }
 }
 
-.picker {
+#picker {
+  background: #000;
+  border-radius: 5px;
+  padding: 10px;
   display: grid;
   gap: 10px;
-  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  position: absolute;
+  visibility: hidden;
 
-  canvas {
+  #picker_square {
     display: block;
-    width: 120px;
     aspect-ratio: 1;
+    color: #f00;
+    position: relative;
+    overflow: hidden;
+    background-image:
+      linear-gradient(rgba(0,0,0,0),#000),
+      linear-gradient(90deg,#fff,currentColor);
   }
 
-  #hue {
+  #picker_marker {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    margin-left: -7.5px;
+    margin-top: -7.5px;
+    box-sizing: border-box;
+    border: 2px solid #fff;
+    outline: 2px solid #000;
+    border-radius: 16px;
+  }
+
+  #picker_hue {
     background: transparent;
     display: block;
     width: 100%
   }
-  #hue::-moz-range-track,
-  #hue::-webkit-slider-runnable-track {
-    background: linear-gradient(90deg in hsl longer hue, red, blue);
+
+  #picker_hue::-moz-range-track,
+  #picker_hue::-webkit-slider-runnable-track {
+    background: linear-gradient(to right,
+      #f00   0,
+      #ff0  16.66%,
+      #0f0  33.33%,
+      #0ff  50%,
+      #00f  66.66%,
+      #f0f  83.33%,
+      #f00 100%);
   }
 }

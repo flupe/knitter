@@ -7,6 +7,8 @@ export const on = (t, e, f) =>
         ? e.forEach(e => on(t, e, f))
         : t.addEventListener(e, f)
 
+export const clamp = (a, b, x) => x < a ? a : x > b ? b : x
+
 // return a copy of a function bound to its parent object
 export const bind = (o, f) => o[f].bind(o)
 

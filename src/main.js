@@ -1,4 +1,5 @@
 import {on, $, stitchTable} from "./prelude.js"
+import {pickColor} from "./picker.js"
 import { Design } from "./design.js"
 
 // initial design size
@@ -42,6 +43,12 @@ const yarns = (function(colors) {
       yarns[YARN].swatch.classList.remove("active")
       yarn.swatch.classList.add("active")
       YARN = i
+    })
+
+    on(yarn.swatch, "dblclick", async () => {
+      pickColor(yarn.swatch, col => {
+        document.body.style.setProperty(`--yarn-color${i}`, col)
+      })
     })
 
     yarns.push(yarn)

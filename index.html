@@ -37,31 +37,11 @@
     </nav>
     <nav id="yarn_swatch">
     </nav>
-    <!--
-    <nav>
-      <color-picker>
-    </nav>
-    -->
     </header>
     <main id="main"></main>
-
-    <!-- component templates -->
-    <template id="picker_template">
-      <div class="picker">
-        <link href="theme.css" rel="stylesheet">
-        <canvas></canvas>
-        <div>
-          <input type="range" id="hue" name="hue"><br>
-          <label for="red">R: </label>
-          <input type="text">
-          <br>
-          <label for="green">G: </label>
-          <input type="text">
-          <br>
-          <label for="blue">B: </label>
-          <input type="text">
-        </div>
-      </div>
-    </template
+    <div id="picker">
+      <div id="picker_square"><div id="picker_marker"></div></div>
+      <input type="range" id="picker_hue" name="hue" min="0" max="360">
+    </div>
   </body>
 </html>
