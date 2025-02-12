@@ -4,43 +4,20 @@
     <title>knitter</title>
     <meta charset="utf-8">
     <link href="theme.css" rel="stylesheet">
-    <script src="main.js" type="module"></script>
     <link href="favicon.svg" rel="shortcut icon" type="image/svg">
+    <script src="src/prelude.js" type="module"></script>
+    <script src="src/design.js"  type="module"></script>
+    <script src="src/main.js"    type="module"></script>
   </head>
   <body>
     <header>
       <nav>
-        <button id="knit" value="knit" title="Knit"><img src="./knit.svg"></button>
-        <button id="pull" value="pull" title="Pull"><img src="./pull.svg"></button>
-        <button id="tuck" value="tuck" title="Tuck"><img src="./tuck.svg"></button>
-        <button title="Miss">
-          <svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' height='16' width='16'>
-            <circle cx="8" cy="8" r="7" stroke="#000" fill="none" stroke-width="2"/>
-          </svg>
-        </button>
-      <!--
-      <button>
-<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' height='16' width='16'>
-  <path d="M 8 1 L 8 15 M 1 8 L 15 8" stroke="#000" fill="none"
-    stroke-width="2"
-    stroke-linecap="round"/>
-</svg> 
-      </button>
-      -->
-      <button title="Right over cross">
-<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' height='16' width='16'>
-  <path d="M 1 1 L 15 15 M 1 15 L 5.5 10.5 M 10.5 5.5 L 15 1" stroke="#000" fill="none"
-    stroke-width="2"
-    stroke-linecap="round"/>
-</svg>
-      </button>
-      <button title="Left over cross">
-<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' height='16' width='16'>
-  <path d="M 15 1 L 1 15 M 15 15 L 10.5 10.5 M 5.5 5.5 L 1 1" stroke="#000" fill="none"
-    stroke-width="2"
-    stroke-linecap="round"/>
-</svg>
-      </button>
+        <button id="knit" value="0" title="Knit"             ><img src="assets/knit.svg"></button>
+        <button id="pull" value="1" title="Pull"             ><img src="assets/pull.svg"></button>
+        <button id="tuck" value="2" title="Tuck"             ><img src="assets/tuck.svg"></button>
+        <button id="miss" value="3" title="Miss"             ><img src="assets/miss.svg"></button>
+        <button id="roc"  value="4"  title="Right over cross"><img src="assets/roc.svg" ></button>
+        <button id="loc"  value="5"  title="Left over cross" ><img src="assets/loc.svg" ></button>
       <button title="Transfer left to right">
 <svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' height='16' width='16'>
   <path d="M 14 1 L 2 15 M 14 15 L 8 8" stroke="#000" fill="none"

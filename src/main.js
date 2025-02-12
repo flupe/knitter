@@ -1,4 +1,4 @@
-import {on, $} from "./prelude.js"
+import {on, $, stitchTable} from "./prelude.js"
 import { Design } from "./design.js"
 
 // initial design size
@@ -7,7 +7,7 @@ const HEIGHT = 32
 
 // global vars
 const MOUSE = {x: 0, y: 0, down: false}
-let TOOL = "knit"
+let TOOL = 0
 let SPACEBAR = false
 let YARN = 0 // active yarn id
 
@@ -117,18 +117,16 @@ on(window, "keydown", async e => {
 design.elem.querySelectorAll("td").forEach(cell => {
   on(cell, "mousedown", e => {
     if (SPACEBAR) return
-    if (TOOL){
-      let i = parseInt(cell.dataset.index)
-      design.draw(i, TOOL, YARN)
-      // cell.dataset.stitch = TOOL
-      // cell.dataset.yarn   = YARN
-      // cell.style.background = `var(--yarn-color${YARN})`
-    }
+    let i = parseInt(cell.dataset.index)
+    design.draw(i, TOOL, YARN)
+    // cell.dataset.stitch = TOOL
+    // cell.dataset.yarn   = YARN
+    // cell.style.background = `var(--yarn-color${YARN})`
   })
 
   on(cell, "mouseover", e => {
     if (SPACEBAR) return
-    if (TOOL && MOUSE.down) {
+    if (MOUSE.down) {
       let i = parseInt(cell.dataset.index)
       design.draw(i, TOOL, YARN)
       // cell.dataset.stitch = TOOL
@@ -138,8 +136,8 @@ design.elem.querySelectorAll("td").forEach(cell => {
 })
 
 knit.classList.add("active")
-on([knit, pull, tuck], "click", async e => {
-  if (TOOL) window[TOOL].classList.remove("active")
+on([knit, pull, tuck, miss, roc, loc], "click", async e => {
+  window[stitchTable[TOOL]].classList.remove("active")
   e.currentTarget.classList.add("active")
-  TOOL = e.currentTarget.value
+  TOOL = parseInt(e.currentTarget.value)
 })

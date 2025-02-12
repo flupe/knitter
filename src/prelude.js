@@ -17,6 +17,9 @@ export const stitchTable =
   [ "knit"
   , "pull"
   , "tuck"
+  , "miss"
+  , "roc"
+  , "loc"
   ]
 
 export const debounce = (delay, fn) => {

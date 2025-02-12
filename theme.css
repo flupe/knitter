@@ -114,8 +114,11 @@ table.design {
       } */
     }
 
-    &[data-stitch="knit"] div { background-image: url(knit.svg) }
-    &[data-stitch="pull"] div { background-image: url(pull.svg) }
-    &[data-stitch="tuck"] div { background-image: url(tuck.svg) }
+    &[data-stitch="knit"] div { background-image: url(assets/knit.svg) }
+    &[data-stitch="pull"] div { background-image: url(assets/pull.svg) }
+    &[data-stitch="tuck"] div { background-image: url(assets/tuck.svg) }
+    &[data-stitch="miss"] div { background-image: url(assets/miss.svg) }
+    &[data-stitch="roc" ] div { background-image: url(assets/roc.svg ) }
+    &[data-stitch="loc" ] div { background-image: url(assets/loc.svg ) }
   }
 }

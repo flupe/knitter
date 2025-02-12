@@ -10,12 +10,11 @@ export class Design {
     this._scale  = 1.0
     this.offset  = {x: 0.0, y: 0.0}
     this.elem    = null
+    this._dirty  = false
 
     if (data.stitchGrid && data.yarnGrid) {
       this.stitchGrid = data.stitchGrid
       this.yarnGrid   = data.yarnGrid
-
-      console.log(data.stitchGrid)
     }
     else {
       this.stitchGrid = new Uint8Array(width * height)
@@ -38,14 +37,14 @@ export class Design {
     this.elem.style.translate = `${ox}px ${oy}px`
   }
 
-  draw(i, stitch = "knit", yarn = 0) {
-    this.stitchGrid[i] = stitchTable[stitch]
+  draw(i, stitch = 0, yarn = 0) {
+    this.stitchGrid[i] = stitch
     this.yarnGrid[i]   = yarn
 
     let cell = this.cells[i]
 
     // update dom
-    cell.dataset.stitch = stitch
+    cell.dataset.stitch   = stitchTable[stitch]
     cell.style.background = `var(--yarn-color${yarn})`
 
     // save
@@ -78,7 +77,6 @@ export class Design {
 
     stitch.classList.add("stitch")
     cell.appendChild(stitch)
-    cell.dataset.stitch = "knit"
 
     // create cells for a single row
     for (let i = 0; i < this.width; i++)
@@ -128,8 +126,8 @@ export class Design {
         yarnGrid:   new Uint8Array(yarnGrid),
       })
     }
-    catch {
-      console.log("Could not load design from local storage.")
+    catch(e) {
+      console.error(`Could not load design from local storage. ${e}`)
       return null
     }
   }

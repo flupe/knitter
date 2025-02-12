@@ -1,4 +1,5 @@
-Experiment at making a web tool for designing stitch patterns.
+Experiment at making a web tool for designing stitch patterns, 
+for hobbyist flatbed knitting machines.
 May be rewritten soonish in a serious language once I have a good idea of what
 I'm trying to achieve.
 
@@ -21,7 +22,7 @@ I'm trying to achieve.
 
 - Possible names when the tool is public:
   - Knitter (maybe some other things exist with this name)
-  - Graknit (Gra)
+  - Graknit
 
 ## References
 
