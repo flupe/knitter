@@ -1,6 +1,6 @@
-import {on, $, stitchTable} from "./prelude.js"
+import {on, $, stitchTable, HexToRGB} from "./prelude.js"
 import {pickColor} from "./picker.js"
-import { Design } from "./design.js"
+import {Design} from "./design.js"
 
 // initial design size
 const WIDTH  = 32
@@ -13,10 +13,6 @@ let SPACEBAR = false
 let YARN = 0 // active yarn id
 
 // viewport params
-let SCALE = 1.0
-let OFFSET = {x:0.0, y:0.0}
-
-const DESIGN = []
 
 const design = (function(){
   let restored = Design.restore()
@@ -34,7 +30,7 @@ const yarns = (function(colors) {
       swatch: $('button'),
     }
 
-    document.body.style.setProperty(`--yarn-color${i}`, col)
+    document.body.style.setProperty(`--yarn-color${i}`, HexToRGB(col))
     yarn.swatch.classList.toggle("active", i == 0)
     yarn.swatch.style.background = `var(--yarn-color${i})`
     yarn_swatch.appendChild(yarn.swatch)
@@ -46,8 +42,9 @@ const yarns = (function(colors) {
     })
 
     on(yarn.swatch, "dblclick", async () => {
-      pickColor(yarn.swatch, col => {
-        document.body.style.setProperty(`--yarn-color${i}`, col)
+      pickColor(yarn.swatch, yarn.color,  col => {
+        yarn.color = col
+        document.body.style.setProperty(`--yarn-color${i}`, HexToRGB(col))
       })
     })
 
@@ -55,7 +52,7 @@ const yarns = (function(colors) {
   })
 
   return yarns
-})(['#f0c432', '#68942f', '#782354'])
+})([0xf0c432, 0x68942f, 0x782354])
 
 
 on(main, "wheel", async e => {
@@ -93,13 +90,13 @@ on(main, "mousedown", async e => {
   }
 })
 
-on(main, "mouseup", async e => {
+on(main, "mouseup", async () => {
   MOUSE.down = false
   main.classList.remove("grabbing")
 })
 
 // if we lose focus, let's cancel ongoing actions & modifiers
-on(window, "blur", async e => {
+on(window, "blur", async () => {
   SPACEBAR = false
   MOUSE.down = false
   main.classList.remove("grab")
@@ -122,7 +119,7 @@ on(window, "keydown", async e => {
 })
 
 design.elem.querySelectorAll("td").forEach(cell => {
-  on(cell, "mousedown", e => {
+  on(cell, "mousedown", () => {
     if (SPACEBAR) return
     let i = parseInt(cell.dataset.index)
     design.draw(i, TOOL, YARN)
@@ -131,7 +128,7 @@ design.elem.querySelectorAll("td").forEach(cell => {
     // cell.style.background = `var(--yarn-color${YARN})`
   })
 
-  on(cell, "mouseover", e => {
+  on(cell, "mouseover", () => {
     if (SPACEBAR) return
     if (MOUSE.down) {
       let i = parseInt(cell.dataset.index)

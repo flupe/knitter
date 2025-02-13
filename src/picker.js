@@ -1,19 +1,14 @@
-import {on, clamp, lerp, HSLToRGB} from "./prelude.js"
+import {on, clamp, lerp, HSLToHex, HexToRGB, HexToHSL} from "./prelude.js"
 
 let down       = false
 let SETTER     = null
 let saturation = 0
 let lightness  = 0
 
-// init --------------
 picker.tabIndex = -1
-  // picker can be focused
-picker_square.style.color = HSLToRGB(picker_hue.value, 1, 0.5)
-  // set square color to current hue
 
-// whenever the hue is changed, update the square
 on(picker_hue, "input", () => {
-  picker_square.style.color = HSLToRGB(picker_hue.value, 1, 0.5)
+  picker_square.style.color = HexToRGB(HSLToHex(picker_hue.value, 1, 0.5))
   update()
 })
 
@@ -26,7 +21,7 @@ on(window, "mouseup", () => down = false)
 
 function update() {
   if (SETTER) {
-    SETTER(HSLToRGB(
+    SETTER(HSLToHex(
       picker_hue.value,
       saturation,
       lightness,
@@ -62,7 +57,17 @@ on(picker, "focusout", ({relatedTarget}) => {
   picker.style.visibility = "hidden"
 })
 
-export function pickColor(target, setter) {
+export function pickColor(target, col = 0x000000, setter) {
+  let [h, s, l] = HexToHSL(col)
+
+  picker_hue.value = h
+  picker_square.style.color = HexToRGB(HSLToHex(h, 1.0, 0.5))
+  let rect = picker_square.getBoundingClientRect()
+  picker_marker.style.left = `${s * rect.width | 0}px`
+  let v = 2 * l / (2 - s)
+  picker_marker.style.top  = `${rect.height * (1 - v) | 0}px`
+  
+
   SETTER = setter
   picker.style.visibility = "visible"
   picker.focus()
