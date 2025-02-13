@@ -13,7 +13,7 @@ let YARN = 0 // active yarn id
 
 // viewport params
 
-const design = window.design = (function(){
+let design = window.design = (function(){
   let restored = Design.restore()
   return restored ? restored :  new Design({width: WIDTH, height: HEIGHT})
 })()
@@ -107,3 +107,10 @@ on([knit, pull, tuck, miss, roc, loc], "click", async e => {
 })
 
 on(yarn_add, "click", () => design.addYarn())
+
+on(btn_new, "click", () => {
+  main.removeChild(design.elem)
+  design = window.design = new Design({width: WIDTH, height: HEIGHT})
+  main.appendChild(design.elem)
+  design.save()
+})

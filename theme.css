@@ -2,8 +2,11 @@
   --stitch-size: 20px;
 }
 
-body {
+* {
   font-family: monospace;
+}
+
+body {
   background: #000;
   color: #ddd;
   margin: 0;
@@ -16,13 +19,31 @@ body {
 }
 
 body > header {
-  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  padding: 10px 5px;
 }
 
-body > header nav {
+#top_bar {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  button {
+    border: none;
+    outline: none;
+    border-radius: 0;
+    cursor: pointer;
+    color: #aaa;
+    background: #333;
+
+    &:hover {
+      background: #555;
+      color: #ccc;
+    }
+  }
+}
+body > header nav:not(#top_bar) {
   display: flex;
   flex-direction: row;
   gap: 5px;
@@ -59,8 +80,8 @@ body > header nav {
 }
 
 #yarn_add {
-  border-radius: 50%;
-  opacity: 0.5;
+  border-radius: 50% !important;
+  opacity: 0.3;
   height: auto;
   width: auto;
   margin: auto 0 auto;
@@ -110,9 +131,10 @@ table.design {
 }
 
 #picker {
-  background: #000;
-  border-radius: 5px;
+  background: #333;
   padding: 10px;
+  border: 1px solid #222;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
   display: grid;
   gap: 10px;
   grid-template-rows: auto auto;
@@ -120,6 +142,7 @@ table.design {
   visibility: hidden;
 
   #picker_square {
+    box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.3);
     cursor: pointer;
     display: block;
     aspect-ratio: 1;
@@ -145,16 +168,22 @@ table.design {
   }
 
   #picker_hue {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    appearance: none;
     background: transparent;
     margin: 0;
     display: block;
     width: 100%
   }
 
-  #picker_hue::-moz-range-track,
-  #picker_hue::-webkit-slider-runnable-track {
-    height: 6px;
-    border-radius: 2px;
+  #picker_hue::-moz-range-track {
+    -webkit-appearance: none;
+    appearance: none;
+    height: .7rem;
+    border-radius: 0;
+    box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.3);
     background: linear-gradient(to right,
       #f00   0,
       #ff0  16.66%,
@@ -163,5 +192,47 @@ table.design {
       #00f  66.66%,
       #f0f  83.33%,
       #f00 100%);
+  }
+
+  #picker_hue::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    appearance: none;
+    height: .7rem;
+    border-radius: 0;
+    box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to right,
+      #f00   0,
+      #ff0  16.66%,
+      #0f0  33.33%,
+      #0ff  50%,
+      #00f  66.66%,
+      #f0f  83.33%,
+      #f00 100%);
+  }
+
+  #picker_hue::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 1rem;
+    width: .6rem;
+    border-radius: 0;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: 2px solid #000;
+    border-radius: 4px;
+    cursor: grab;
+  }
+
+  #picker_hue::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 1rem;
+    width: .6rem;
+    border-radius: 0;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: 2px solid #000;
+    border-radius: 4px;
+    cursor: grab;
   }
 }
