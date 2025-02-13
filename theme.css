@@ -61,9 +61,9 @@ body > header nav {
 #yarn_add {
   border-radius: 50%;
   opacity: 0.5;
-  height: 80%;
+  height: auto;
+  width: auto;
   margin: auto 0 auto;
-  font-size: 1.3rem;
 }
 
 main {
