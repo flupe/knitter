@@ -1,5 +1,4 @@
-import {on, $, stitchTable, HexToRGB} from "./prelude.js"
-import {pickColor} from "./picker.js"
+import {on, $, stitchTable} from "./prelude.js"
 import {Design} from "./design.js"
 
 // initial design size
@@ -14,46 +13,12 @@ let YARN = 0 // active yarn id
 
 // viewport params
 
-const design = (function(){
+const design = window.design = (function(){
   let restored = Design.restore()
   return restored ? restored :  new Design({width: WIDTH, height: HEIGHT})
 })()
 
 main.appendChild(design.elem)
-
-// initialize yarns
-const yarns = (function(colors) {
-  const yarns = []
-  colors.forEach((col, i) => {
-    const yarn = {
-      color: col,
-      swatch: $('button'),
-    }
-
-    document.body.style.setProperty(`--yarn-color${i}`, HexToRGB(col))
-    yarn.swatch.classList.toggle("active", i == 0)
-    yarn.swatch.style.background = `var(--yarn-color${i})`
-    yarn_swatch.appendChild(yarn.swatch)
-
-    on(yarn.swatch, "click", async () => {
-      yarns[YARN].swatch.classList.remove("active")
-      yarn.swatch.classList.add("active")
-      YARN = i
-    })
-
-    on(yarn.swatch, "dblclick", async () => {
-      pickColor(yarn.swatch, yarn.color,  col => {
-        yarn.color = col
-        document.body.style.setProperty(`--yarn-color${i}`, HexToRGB(col))
-      })
-    })
-
-    yarns.push(yarn)
-  })
-
-  return yarns
-})([0xf0c432, 0x68942f, 0x782354])
-
 
 on(main, "wheel", async e => {
   e.preventDefault()
@@ -123,9 +88,6 @@ design.elem.querySelectorAll("td").forEach(cell => {
     if (SPACEBAR) return
     let i = parseInt(cell.dataset.index)
     design.draw(i, TOOL, YARN)
-    // cell.dataset.stitch = TOOL
-    // cell.dataset.yarn   = YARN
-    // cell.style.background = `var(--yarn-color${YARN})`
   })
 
   on(cell, "mouseover", () => {
@@ -133,8 +95,6 @@ design.elem.querySelectorAll("td").forEach(cell => {
     if (MOUSE.down) {
       let i = parseInt(cell.dataset.index)
       design.draw(i, TOOL, YARN)
-      // cell.dataset.stitch = TOOL
-      // cell.style.background = `var(--yarn-color${YARN})`
     }
   })
 })
@@ -145,3 +105,5 @@ on([knit, pull, tuck, miss, roc, loc], "click", async e => {
   e.currentTarget.classList.add("active")
   TOOL = parseInt(e.currentTarget.value)
 })
+
+on(yarn_add, "click", () => design.addYarn())

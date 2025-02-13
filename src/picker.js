@@ -2,6 +2,7 @@ import {on, clamp, lerp, HSLToHex, HexToRGB, HexToHSL} from "./prelude.js"
 
 let down       = false
 let SETTER     = null
+let RESOLVER   = null
 let saturation = 0
 let lightness  = 0
 
@@ -55,12 +56,15 @@ on(picker_square, "mousemove", e => {
 on(picker, "focusout", ({relatedTarget}) => {
   if (picker.contains(relatedTarget)) return
   picker.style.visibility = "hidden"
+  if (RESOLVER) RESOLVER()
 })
 
 export function pickColor(target, col = 0x000000, setter) {
   let [h, s, l] = HexToHSL(col)
 
   picker_hue.value = h
+  saturation = s
+  lightness  = l
   picker_square.style.color = HexToRGB(HSLToHex(h, 1.0, 0.5))
   let rect = picker_square.getBoundingClientRect()
   picker_marker.style.left = `${s * rect.width | 0}px`
@@ -73,4 +77,6 @@ export function pickColor(target, col = 0x000000, setter) {
   picker.focus()
   picker.style.left = `${target.offsetLeft}px`
   picker.style.top  = `${target.offsetTop + target.offsetHeight}px`
+
+  return new Promise(resolve => RESOLVER = resolve)
 }
